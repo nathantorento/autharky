@@ -1,0 +1,3 @@
+flask db init
+flask db migrate -m "subtopic table"
+flask db upgrade

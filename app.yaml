@@ -1,0 +1,14 @@
+runtime: python
+env: flex
+entrypoint: gunicorn -b :8080 runServer:app
+runtime_config:
+  python_version: 3.7
+
+env_variables:
+  CLOUDSQL_CONNECTION_NAME: nathancapstone2021-296406:us-central1:nathancapstone-sqldatabase-2021
+  CLOUD_SQL_CONNECTION_NAME: nathancapstone2021-296406:us-central1:nathancapstone-sqldatabase-2021
+  DB_USER: root
+  DB_PASS: rp1prekOdA5z0fym
+  DB_NAME: capstone_db
+  CLOUDSQL_USER: root
+  CLOUDSQL_PASSWORD: rp1prekOdA5z0fym

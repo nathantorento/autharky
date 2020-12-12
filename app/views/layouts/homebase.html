@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- Template by quackit.com -->
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/homebase.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}">
+        {% block links %}
+        {% endblock %}
+	</head>
+
+	<body>
+
+		<header id="header">
+
+		</header>
+
+		<div id="wrapper">
+		<input type="checkbox" id="openmenu" class="hamburger-checkbox">
+			<div class="hamburger-icon">
+			    <label for="openmenu" id="hamburger-label">
+			      <span></span>
+			      <span></span>
+			      <span></span>
+			      <span></span>
+			    </label>
+			  </div>
+			<main>
+				<div id="content">
+					<div class="innertube">
+                        {% block content %}
+                        {% endblock %}
+					</div>
+				</div>
+			</main>
+
+			{% block modal %}
+			{% endblock %}
+
+			{% block leftpane %}
+            {% endblock %}
+
+			<div class="menu-pane">
+
+		      <nav>
+		        <ul class="menu-links">
+		          <li><a href="{{ url_for('main.logout') }}">Logout</a><span id="QC-info">
+		          </span>
+
+		          </li>
+
+		        </ul>
+
+		      </nav>
+		    </div>
+
+		</div>
+		
+    <script src="{{url_for('static', filename='vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+    {% block scripts %}
+    {% endblock %}
+	</body>
+</html>

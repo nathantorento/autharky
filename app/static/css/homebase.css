@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css?family=Libre+Caslon+Text:400,700&display=swap');
+
+body {
+        margin:0;
+        padding:0;
+        font-family: Sans-Serif;
+        line-height: 1.5em;
+      }
+      
+      #header {
+        background: #7000FF;
+        height: 100px;
+      }
+      
+      #header h1 {
+        margin: 0;
+        padding-top: 15px;
+      }
+      
+      main {
+        padding-bottom: 10010px;
+        margin-bottom: -10000px;
+        float: left;
+        width: 100%;
+        height: 100%;
+      }
+      
+      #nav {
+        padding-bottom: 10010px;
+        margin-bottom: -10000px;
+        float: left;
+        width: 20vw;
+        margin-left: -100%;
+        background: #D5B5FF;
+        height: 100%;
+      }
+      
+      #footer {
+        clear: left;
+        width: 100%;
+        background: #ccc;
+        text-align: center;
+        padding: 4px 0;
+      }
+  
+      #wrapper {
+        overflow: hidden;
+        height: 100vw;
+      }
+            
+      #content {
+        margin-left: 230px; /* Same as 'nav' width */
+        padding-left: 10vw;
+      }
+      
+      .innertube {
+        margin: 15px; /* Padding for content */
+        margin-top: 15px;
+      }
+    
+      p {
+        color: #555;
+      }
+  
+      .hamburger-icon {
+          position: absolute;
+          z-index: 1;
+          top: 3vh;
+          right: 2vw;
+          padding-bottom: 2vh;
+        }
+
+        .hamburger-icon span {
+          height: 5px;
+          width: 40px;
+          background-color: white;
+          display: block;
+          margin: 5px 0px 5px 0px;
+          transition: 0.7s ease-in-out;
+          transform: none;
+        }
+
+        #openmenu:checked ~ div.menu-pane {
+            right: 0;
+            transform: translateX(0vw);
+        }
+
+        #openmenu:checked ~ .hamburger-icon span:nth-of-type(2) {
+          transform: translate(0%, 175%) rotate(-45deg);
+          background-color: white;
+        }
+
+        #openmenu:checked ~ .hamburger-icon span:nth-of-type(3) {
+          transform: rotate(45deg);
+          background-color: white;
+        }
+
+        #openmenu:checked ~ .hamburger-icon span:nth-of-type(1) {
+          opacity: 0;
+        }
+
+        #openmenu:checked ~ .hamburger-icon span:nth-of-type(4) {
+          opacity: 0;
+        }
+
+        div.menu-pane {
+          background-color: #3d1e6d;
+            position: absolute;
+            transform: translateX(-30vw);
+            width: 25vw;
+            height: 100%;
+        }
+
+        .menu-pane p {
+          color: black;
+          font-size: 0.6em;
+        }
+
+        .menu-pane nav {
+            padding: 8%;
+            margin-top: 21%;
+            margin-left: 30%;
+        }
+
+        .menu-links li, a, span {
+              transition: 0.5s ease-in-out;
+        }
+
+        .menu-pane ul {
+          list-style-type: none;
+          padding: 10%;
+          display: inline-block;
+        }
+
+        .menu-pane li {
+          padding-top: 20px;
+          padding-bottom: 20px;
+          margin-left: 10px;
+            font-size: 1em;
+        }
+
+
+        .menu-pane li:first-child {
+          font-size: 1.3em;
+          margin-left: -10px;
+        }
+
+
+        .menu-links li a {
+          color: white;
+          text-decoration: none;
+        }
+
+
+        .menu-links li:hover a {
+          color: #FFAB91;
+        }
+
+        .menu-links li:first-child:hover a {
+          color: black;  
+          background-color: #FFAB91;
+        }
+
+        #QC-info {
+          background-color: #FFAB91;
+            border: 2px solid;
+          border-color: #FFAB91;
+        display: block;
+          opacity: 0;
+          
+        }
+
+        .menu-links li:first-child:hover #QC-info {
+        opacity: 1;
+        }
+
+        .menu-links li:first-child:hover #DC-info {
+        opacity: 1;
+        }
+
+        .menu-links li:first-child a {
+          padding: 5px;
+        }
+
+        #DC-info {
+          background-color: #FFAB91;
+            border: 2px solid;
+          border-color: #FFAB91;
+        display: block;
+          opacity: 0;
+        }
+
+
+
+
+
+
+        input.hamburger-checkbox {
+          position: absolute;
+          z-index: 3;
+          top: 5vh;
+          left: 5vw;
+          width: 10vw;
+          opacity: 0;
+          height: 6vh;
+        }

@@ -1,0 +1,43 @@
+{% extends 'layouts/homebase.html' %}
+
+{% block links %}
+    {{ JSGlue.include() }}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/create.css')}}">
+{% endblock %}
+
+{% block content %}
+    <div class="app-main__inner align-horizontal-center">
+
+        <div class="create-view">
+            <!-- <div class="scrollbar" id="style-1">
+                <div class="force-overflow"> -->
+                    <div style="text-align: left;" >
+                        <h6 class="title-label title-font-size" id = "CourseName">Course name:</h6>
+                        <input type="text" id="course_title" name="course_title" class="create-text-input">
+                        <div class="invalid-feedback" id = "invalidCoursenName" style="display: none; font-size:16px">invalid Course name
+                        </div>
+                        <br>
+                        <h6 class="title-label title-font-size" id = "NumberTopic">Number of topics</h6>
+                        <input type="text" id="Number_topic" name="Number_topic" class="create-text-input">
+                        <div class="invalid-feedback"  id = "invalidNumbertopic" style="display: none; font-size:16px">invalid Number of topics
+                        </div>
+                        <br>
+                        <h6 class="title-label title-font-size">Fill in all topics now?</h6>
+                        <div class="btn-create-container">
+                            <button class="btn-create" id="btn_yes" name="btn_yes">Yes</button>
+                            <button class="btn-create" id="btn_no" name="btn_no">No</button>
+                        </div>
+                        <br>
+                        <div id="topic_container" name="topic_container">                                
+                        </div>
+                    </div>
+                </div>
+            <!--   </div> -->
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{url_for('static', filename='js/create.js')}}"></script>
+{% endblock %}

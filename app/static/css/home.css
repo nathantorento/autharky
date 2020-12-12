@@ -1,0 +1,415 @@
+.main-hr {
+  width: 30%;
+  border: none;
+  border-top: 1px solid #c3c3c3;
+}
+.icon-btn {
+  position: absolute !important;
+  right: 50px;
+  bottom: 50px;
+  width: 50px;
+  height: 50px;
+  border: 1px solid #cdcdcd;
+  background: white;
+  border-radius: 25px;
+  overflow: hidden;
+  position: relative;
+  transition: width 0.2s ease-in-out;
+}
+.add-btn:hover {
+  width: 120px;
+}
+.add-btn::before,
+.add-btn::after {
+  transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+  content: "";
+  position: absolute;
+  height: 4px;
+  width: 10px;
+  top: calc(50% - 2px);
+  background: red;
+}
+.add-btn::after {
+  right: 14px;
+  overflow: hidden;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+.add-btn::before {
+  left: 14px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.icon-btn:focus {
+  outline: none;
+}
+.btn-txt {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.add-btn:hover::before,
+.add-btn:hover::after {
+  width: 4px;
+  border-radius: 2px;
+}
+.add-btn:hover .btn-txt {
+  opacity: 1;
+}
+.add-icon::after,
+.add-icon::before {
+  transition: all 0.2s ease-in-out;
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 2px;
+  top: calc(50% - 10px);
+  background: red;
+  overflow: hidden;
+}
+.add-icon::before {
+  left: 22px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.add-icon::after {
+  right: 22px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+.add-btn:hover .add-icon::before {
+  left: 15px;
+  height: 4px;
+  top: calc(50% - 2px);
+}
+.add-btn:hover .add-icon::after {
+  right: 15px;
+  height: 4px;
+  top: calc(50% - 2px);
+}
+
+.align-horizontal-center {
+  align-items: center;
+    text-align: -webkit-center;
+    text-align: center;
+}
+
+.app-sidebar__inner {
+  padding: 2px 1.5rem 1.5rem
+}
+
+.course {
+  width: 90%;
+}
+
+.course-tab-bar {
+  background: #EFECEC;
+}
+
+.course-content {
+  background: #A55FFF;
+  min-height: 500px;
+}
+
+.add-question {
+  text-align: center;
+  padding-top: 140px;
+}
+
+.add-question-btn {
+  padding: 7px 30px 7px 30px;
+  border-radius: 20px;
+  border: none;
+}
+
+.add-question-modal-content {
+  text-align: -webkit-center;
+  min-height: 500px;
+  height: 80vh;
+  overflow-y: auto;
+}
+
+.btn-create-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%; 
+  margin-left: 0px;
+}
+
+.empty-modal-header {
+  background: none!important;
+  border-bottom: none!important;
+}
+
+.btn-create {
+  width: 50%;
+  height: 40px;
+  font-size: 17px;
+  cursor: pointer;
+}
+.btn-create:hover {
+  width: 50%;
+  height: 40px;
+  background-color: #ddd;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+
+.question-type {
+  margin-top: 90px;
+  width: 80%;
+  text-align: center;
+}
+
+.question-name {
+  width: 100%;
+  height: auto;
+  font-size: 1rem;
+  background: #dddddd;
+}
+
+.question-name-edit {
+  line-height: normal !important;
+  height: 30px !important;
+  font-size: 1.3rem !important;
+  margin-top: 1px !important;
+  padding: 10px;
+  color: #000000;
+  text-align: center;
+}
+
+.upload-picture-btn {
+  padding: 3px 40px 3px 40px;
+  border-radius: 20px;
+  border: none;
+  background: #ffffff;
+}
+
+.answer-field {
+  background: #f9f7f7;
+  min-height: 200px;
+  border: #aaaaaa solid 1px;
+  padding-left: 0px;
+  margin-left: 0px;
+  padding-right: 0px;
+  margin-right: 0px;
+}
+
+.answer-field div {
+  height: 90%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+
+.answer-field div textarea {
+  width: 100%;
+  height: 90%;
+}
+
+.answer-field div img {
+  max-width: 100%;
+  max-height: 80%;
+}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  width: 50%;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: block;
+  padding: 6px 12px;
+  -webkit-animation: fadeEffect 1s;
+  animation: fadeEffect 1s;
+  color:#ff4dc4;
+}
+
+/* Fade in tabs */
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.showdata 
+{
+    margin:20px;
+    width:96%;
+    min-height: 900px;
+    background-color:#a64dff;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 75px;
+}
+
+.button1 {
+  width:390px;
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+  border-radius: 75px;
+}
+
+.button1:hover {
+  width:390px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 75px;
+}
+
+.btn-light {
+  width:390px;
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+  border-radius: 75px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.btn-light:hover {
+  width:390px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 75px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.nav-text { font-size: 20px; }
+
+/*::-webkit-scrollbar {
+  width: 20px;
+}
+
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+
+::-webkit-scrollbar-thumb {
+  background: red; 
+  border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
+}
+*/
