@@ -3232,13 +3232,7 @@ tbody.collapse.show {
   text-align: center;
 }
 
-.tab-content > .tab-pane {
-  display: none;
-}
 
-.tab-content > .active {
-  display: block;
-}
 
 .navbar {
   position: relative;

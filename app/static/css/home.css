@@ -46,6 +46,8 @@
 .btn-txt {
   opacity: 0;
   transition: opacity 0.2s;
+  font-size: 17px; 
+  cursor: pointer;
 }
 .add-btn:hover::before,
 .add-btn:hover::after {
@@ -94,7 +96,6 @@
 }
 
 .app-sidebar__inner {
-  padding: 2px 1.5rem 1.5rem
 }
 
 .course {
@@ -165,7 +166,6 @@
   width: 100%;
   height: auto;
   font-size: 1rem;
-  background: #dddddd;
 }
 
 .question-name-edit {
@@ -413,3 +413,10 @@
   background: #b30000; 
 }
 */
+
+.error {
+  color: red;
+  font-size: 30px;
+  display: none;
+
+}

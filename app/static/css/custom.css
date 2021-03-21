@@ -6078,7 +6078,7 @@ a.badge-alternate:focus {
 
 .close {
 	float: right;
-	font-size: 1.5rem;
+	font-size: 4.3rem;
 	font-weight: 700;
 	line-height: 1;
 	color: #000;
@@ -10628,14 +10628,27 @@ button,
 	position: relative;
 	list-style: none
 }
+.vertical-nav-menu > li {
+	padding: 5px 20px;
+}
 
+#nav .vertical-nav-menu > li:hover {
+	background: #35c335;
+}
+#nav .vertical-nav-menu .instructor {
+	color: red;
+	width: 100%;
+}
+#nav .vertical-nav-menu .student {
+	width: 100%;
+}
 .vertical-nav-menu:before {
 	opacity: 0;
 	transition: opacity 300ms
 }
 
 .vertical-nav-menu li a {
-	font-size: 1rem;
+	font-size: 15px;
 	display: block;
 	line-height: 2rem;
 	height: 2rem;
@@ -10683,7 +10696,7 @@ button,
 	top: 50%;
 	margin-top: -17px;
 	font-size: 1.5rem;
-	opacity: .3;
+	opacity: 1;
 	transition: color 300ms
 }
 

@@ -130,12 +130,15 @@ def create_app():
    init_other(app)
    return app
 
+
 def init_blueprints(app):
    for bp in blueprints:
       app.register_blueprint(bp)
 
+
 def init_extensions(app):
    pass
+
 
 def init_other(app):
    # global db

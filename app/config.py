@@ -3,18 +3,16 @@ import os
 """
 Flask configuration objects.
 """
+
 def gen_connection_string():
-    # if not on Google then use local MySQL
-    if not os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/'):
+
+    if not os.environ.get('CLOUD_APP', '').startswith('AppEngine'):
         return 'mysql+pymysql://root@127.0.0.1:3306/capstone_db'
     else:
-        conn_name = os.environ.get('CLOUDSQL_CONNECTION_NAME' '')
+        conn_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME' '')
         sql_user = os.environ.get('CLOUDSQL_USER', 'root')
         sql_pass = os.environ.get('CLOUDSQL_PASSWORD', '')
-    # conn_name = "nathancapstone2021-296406:us-central1:nathancapstone-sqldatabase-2021"
-    # sql_user = "root"
-    # sql_pass = "rp1prekOdA5z0fym"
-        conn_template = 'mysql+pymysql://%s:%s@127.0.0.1:3306/capstone_db?unix_socket=/cloudsql/%s'
+        conn_template = 'mysql+pymysql://%s:%s@/capstone_db?unix_socket=/cloudsql/%s'
         return conn_template % (sql_user, sql_pass, conn_name)
 
 

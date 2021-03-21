@@ -28,16 +28,51 @@ class SubTopic(db.Model):
     id_course = db.Column(db.Integer, db.ForeignKey('course.id'))
     id_topic = db.Column(db.Integer, db.ForeignKey('topic.id'))
     id_user = db.Column(db.Integer, db.ForeignKey('user.id'))
-    img_url_answer = db.Column(db.String(512), index=True)
-    img_url_questions = db.Column(db.String(2048), index=True)
-    correct_answer = db.Column(db.Integer, index=True)
+    question_count = db.Column(db.Integer,default=0)
 
+class Question(db.Model):
+    __tablename__ = 'question'
+    id = db.Column(db.Integer, primary_key=True)
+    question_type = db.Column(db.Integer)
+    question = db.Column(db.String(256), index=True)
+    id_course = db.Column(db.Integer, db.ForeignKey('course.id'))
+    id_topic = db.Column(db.Integer, db.ForeignKey('topic.id'))
+    id_subtopic = db.Column(db.Integer, db.ForeignKey('subtopic.id'))
+    id_user = db.Column(db.Integer, db.ForeignKey('user.id'))
+    answer1 = db.Column(db.Text())
+    answer2 = db.Column(db.Text())
+    answer3 = db.Column(db.Text())
+    answer4 = db.Column(db.Text())
+    question_number = db.Column(db.Integer,default=1)
+    correct_answer = db.Column(db.Integer)
+
+class TestResult(db.Model):
+    __tablename__ = 'test_result'
+    id = db.Column(db.Integer, primary_key=True)
+    id_course = db.Column(db.Integer, db.ForeignKey('course.id'))
+    id_topic = db.Column(db.Integer, db.ForeignKey('topic.id'))
+    id_subtopic = db.Column(db.Integer, db.ForeignKey('subtopic.id'))
+    id_user = db.Column(db.Integer, db.ForeignKey('user.id'))
+    question_count = db.Column(db.Integer)
+    answers = db.Column(db.String(256))
+    correct_answers = db.Column(db.String(256))
+    is_correct = db.Column(db.String(256))
+    show = db.Column(db.Integer,default=1)
+
+class Study(db.Model):
+    __tablename__ = 'user_texts'
+    id = db.Column(db.Integer, primary_key=True)
+    subtopic_id = db.Column(db.Integer, db.ForeignKey('subtopic.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    study = db.Column(db.Text())
 
 class User(UserMixin, db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True)
     password_hash = db.Column(db.String(256), unique=False)
+    userrole = db.Column(db.String(256), unique=False)
+    email = db.Column(db.String(256), unique=True)
     course = db.relationship('Course', backref='user', lazy='dynamic')
     subtopic = db.relationship('SubTopic', backref='user', lazy='dynamic')
 

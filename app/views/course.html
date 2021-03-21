@@ -1,0 +1,320 @@
+{% extends 'layouts/homebase.html' %}
+		
+	{% block links %}
+		{{ JSGlue.include() }}
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/home.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/custom.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/searchbox.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/util.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/font-awesome.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/summernote.css')}}">
+	{% endblock %}
+
+	{% block content %}
+		<div class="courseContainer" id="courseContainer" style="display: none">
+	    	<div class="card-body course">
+                <ul class="tabs-animated-shadow nav-justified tabs-animated nav course-tab-bar">
+                    <li class="nav-item">
+                        <a role="tab" class="nav-link active" id="tab-c1-0" data-toggle="tab" href="#tab-animated1-0">
+                            <span class="nav-text">Study Guide</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a role="tab" class="nav-link" id="tab-c1-1" data-toggle="tab" href="#tab-animated1-1">
+                            <span class="nav-text">Diagnostic Questions</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content course-content">
+                	<br>
+                    <div class="tab-pane active" id="tab-animated1-0" role="tabpanel">
+                        <!-- <p class="mb-0">Put iframe</p> -->
+						<!--<p><iframe height="620" align="middle" width="100%" border="0" src="https://docs.google.com/document/d/1fJsPeFIrw6usHEEmyJbZ95X7TFaia6LLMCh6l9Sqt-Q/edit?usp=sharing&embed=true&output=embed"></iframe></p>-->
+						<div>
+							<textarea id="studyGuide" style="height:620px;width:100%;display:none" class="textarea summernote"></textarea>
+						</div>
+                    </div>
+                    <div class="tab-pane" id="tab-animated1-1" role="tabpanel">
+                    	<div class="add-question" id="addQuestion" name="addQuestion">
+							{% if course['role'] ==  "student" %}
+							<button class="btn-light add-question-btn" id = "modalbtn" style = "cursor: pointer;display:none;" data-backdrop="static" data-toggle="modal" data-target=".add-question-modal">Diagnostic Questions</button>
+							<button class="btn-light add-question-btn" id = "Questionbtn" 
+                    		style = "cursor: pointer; " data-toggle="modal"  data-backdrop="static" data-target=".add-question-modal">Diagnostic Questions</button>
+							{% endif %}
+							{% if course['role'] ==  "instructor" %}
+                    		<button class="btn-light add-question-btn" id = "modalbtn" style = "cursor: pointer;" data-toggle="modal" data-target=".add-question-modal">Diagnostic Questions</button>
+							<button class="btn-light add-question-btn" id = "Questionbtn" 
+                    		style = "cursor: pointer; display:none;" data-toggle="modal" data-target=".add-question-modal">Diagnostic Questions</button>
+							{% endif %}
+						</div>                        
+                    </div>
+                </div>
+            </div>
+	    </div>
+	{% endblock %}
+
+	{% block modal %}
+	<div class="modal fade add-question-modal" id = "modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header empty-modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="modalClose()">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body add-question-modal-content">
+					<div class="question-type" id="selectQuestionType" name="selectQuestionType">
+						<h3>How would you like to enter the diagnostic question(s) for this section?</h3>
+						<br><br>
+						<div class="btn-create-container">
+							<button class="btn-create" id="typeManually" name="typeManually" onclick="typeManually()">Type manually</button>
+							<button class="btn-create" id="uploadPicture" name="uploadPicture" onclick="uploadPicture()">Upload pictures</button>
+						</div>
+					</div>
+
+					<div id="test" name="upload" style="display: none">
+						
+					</div>
+
+
+
+					<div id="questionEdit" name="questionEdit">
+						<div id="manually" name="manually">
+							<h6 class="text-left question-number" id="questionNumber1">Question 1:</h6>
+							<div class="question-name">
+								<input class="question-name-edit" type="text" name="questionName" id="textQuestion">
+							</div>
+							<br>
+							<h6 class="text-left">Answers: (Don't forget to select the correct answer)</h6>
+							<div class="answer-container">
+								<div>
+									<div class="row m-l-0 m-r-0">
+										<div class="col-md-6 answer-field"  id = "answer-fieldA" >
+											<div class="col-md-2 m-l-0 m-r-0 float-l" >
+												<input type="radio" id="QTradioA" name="QTradio" style="height:27px; width:28px;">
+											</div>
+											<div class="col-md-10 m-l-0 m-r-0 float-r"  style = "background-color:#d9d9d9;">
+												<textarea id="QToptionA" name="optionA" style = "margin-top: 10px;"></textarea>
+											</div>
+										</div>
+										<div class="col-md-6 answer-field"   id = "answer-fieldB"  >
+											<div class="col-md-2 m-l-0 m-r-0 float-l">
+												<input type="radio" id="QTradioB" name="QTradio" style="height:27px; width:28px;">
+											</div>
+											<div class="col-md-10 m-l-0 m-r-0 float-r"  style = "background-color:#d9d9d9;">
+												<textarea id="QToptionB" name="optionB"  style = "margin-top: 10px;"></textarea>
+											</div>
+										</div>
+									</div>
+									<div class="row m-l-0 m-r-0">
+										<div class="col-md-6 answer-field"  id = "answer-fieldC"  >
+											<div class="col-md-2 m-l-0 m-r-0 float-l">
+												<input type="radio" id="QTradioC" name="QTradio" style="height:27px; width:28px;">
+											</div>
+											<div class="col-md-10 m-l-0 m-r-0 float-r"  style = "background-color:#d9d9d9;">
+												<textarea id="QToptionC" name="optionC" style = "margin-top: 10px;"></textarea>
+											</div>
+										</div>
+										<div class="col-md-6 answer-field" id = "answer-fieldD" >
+											<div class="col-md-2 m-l-0 m-r-0 float-l">
+												<input type="radio" id="QTradioD" name="QTradio" style="height:27px; width:28px;">
+											</div>
+											<div class="col-md-10 m-l-0 m-r-0 float-r"  style = "background-color:#d9d9d9;">
+												<textarea id="QToptionD" name="optionD" style = "margin-top: 10px;"></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<br>
+							<button class="btn-light" id = "CreateQuestion" onClick="createQuestion(0)">Create Question</button>
+							<br>
+							<div class="error" id="createQuestionTextError"></div>
+						</div>
+						<div id="upload" name="upload">
+							<h6 class="text-left question-number" id="questionNumber2">Question 1:</h6>
+							<div class="question-name">
+								<button class="btn-light upload-picture-btn" style = "width: 240px;" id="questionImage" name="questionImage" onclick="buttonQuestionClick()">Upload image</button>
+								<input type="file" id="attachmentQuestion" name="attachmentQuestion" onchange="showImageQuestion()" hidden>
+								<div class="" style="width: auto;height: auto;">
+									<img id="imageQuestion" name="imageQuestion" style = "display: none" src="" style = "width: 50%; height: 50%;" alt>
+								</div>
+							</div>
+							<br>
+							<h6 class="text-left">Answers: (Don't forget to select the correct answer)</h6>
+							<div class="answer-container">
+								<div>
+									<div class="row m-l-0 m-r-0">
+										<div class="col-md-6 answer-field" id = "answer-imageA" >
+											<div class="col-md-2 m-l-0 m-r-0 float-l">
+												<input type="radio" id="QIradioA" name="QIradio" style="height:27px; width:28px;">
+											</div>
+											<div class="col-md-10 m-l-0 m-r-0 float-r" id="optionA" name="optionA" style = "background-color:#d9d9d9;">
+												<button class="btn-light upload-picture-btn" style = "width: 240px;"
+												id="buttonA" name="buttonA" onclick="buttonAClick()">Upload image</button>
+												<input type="file" id="attachmentA" name="attachmentA" onchange="showImageA()" hidden>
+												<img id="imageA" name="imageA" src="" alt>
+											</div>
+										</div>
+										<div class="col-md-6 answer-field"  id = "answer-imageB" >
+											<div class="col-md-2 m-l-0 m-r-0 float-l">
+												<input type="radio" id="QIradioB" name="QIradio" style="height:27px; width:28px;">
+											</div>
+											<div class="col-md-10 m-l-0 m-r-0 float-r" id="optionB" name="optionB" style = "background-color:#d9d9d9;">
+												<button class="btn-light upload-picture-btn" style = "width: 240px;" id="buttonB" name="buttonB" onclick="buttonBClick()">Upload image</button>
+												<input type="file" id="attachmentB" name="attachmentB" onchange="showImageB()" hidden>
+												<img id="imageB" name="imageB" src="" alt>
+											</div>
+										</div>
+									</div>
+									<div class="row m-l-0 m-r-0">
+										<div class="col-md-6 answer-field"  id = "answer-imageC" >											
+											<div class="col-md-2 m-l-0 m-r-0 float-l">
+												<input type="radio" id="QIradioC" name="QIradio" style="height:27px; width:28px;">
+											</div>
+											<div class="col-md-10 m-l-0 m-r-0 float-r" id="optionC" name="optionC" style = "background-color:#d9d9d9;">
+												<button class="btn-light upload-picture-btn" style = "width: 240px;" id="buttonC" name="buttonC" onclick="buttonCClick()">Upload image</button>
+												<input type="file" id="attachmentC" name="attachmentC" onchange="showImageC()" hidden>
+												<img id="imageC" name="imageC" src="" alt>
+											</div>
+										</div>
+										<div class="col-md-6 answer-field"  id = "answer-imageD" >
+											<div class="col-md-2 m-l-0 m-r-0 float-l">
+												<input type="radio" id="QIradioD" name="QIradio" style="height:27px; width:28px;">
+											</div>
+											<div class="col-md-10 m-l-0 m-r-0 float-r" id="optionD" name="optionD" style = "background-color:#d9d9d9;margin-bottom: 5px;">
+												<button class="btn-light upload-picture-btn" style = "width: 240px;" id="buttonD" name="buttonD" onclick="buttonDClick()">Upload image</button>
+												<input type="file" id="attachmentD" name="attachmentD" onchange="showImageD()" hidden>
+												<img id="imageD" name="imageD" src="" alt>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<br>
+							<button class="btn-light" id = "createquestion" onclick="createQuestion(1)">Create Question</button>
+							<br>
+							<div class="error" id="createQuestionImageError"></div>
+						</div>
+
+
+						
+					</div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	{% endblock %}
+
+	{% block leftpane %}
+	<nav id="navCourse">
+		<div class="innertube">
+			<h3>You have joined {{course.title}} class</h3>
+		</div>
+		<div class="app-sidebar__inner">
+			{% if current_user.is_authenticated %}
+			<ul class="vertical-nav-menu">
+				<li>
+			        <!-- <a href="" class="mm-active">
+			            Dashboard Example 1
+			        </a> //god-->
+			    </li>
+				{% if course is defined %}
+			    <li>
+		            <a href="">
+						{{ course['title'] }}
+		                <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+		            </a>
+					{% for topic in course['topic'] %}
+		            <ul>
+		                <li>
+		                    <a href="">
+		                        <i class="metismenu-icon"></i>
+								{{ topic['title'] }}
+		                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+		                    </a>
+							{% for subtopic in topic['subtopic']%}
+		                    <ul>
+		                        <li>
+									{% if subtopic['test_result'] == 1 %}
+		                            <a href="#sss" class="subTopic right-answer" id={{"sub_topic"+subtopic['subtopic_id']|string}} onclick="subtopicClick({{subtopic['course_id']}}, {{subtopic['subtopic_id']}}, {{user_id}})">
+		                                <i class="metismenu-icon"></i>
+										{{ subtopic['title'] }}
+									</a>
+									{% endif %}
+									{% if subtopic['test_result'] == 0 %}
+		                            <a href="#sss" class="subTopic wrong-answer" id={{"sub_topic"+subtopic['subtopic_id']|string}} onclick="subtopicClick({{subtopic['course_id']}}, {{subtopic['subtopic_id']}}, {{user_id}})">
+		                                <i class="metismenu-icon"></i>
+										{{ subtopic['title'] }}
+									</a>
+									{% endif %}
+									{% if subtopic['test_result'] == -1 %}
+		                            <a href="#sss" class="subTopic" id={{"sub_topic"+subtopic['subtopic_id']|string}} onclick="subtopicClick({{subtopic['course_id']}}, {{subtopic['subtopic_id']}}, {{user_id}})">
+		                                <i class="metismenu-icon"></i>
+										{{ subtopic['title'] }}
+									</a>
+									{% endif %}
+									<input type="hidden" value="" class="subtopic-ids" data-subtopic={{subtopic['subtopic_id']}}/>
+		                        </li>
+		                    </ul>
+							{% endfor %}
+		                </li>
+		                <!-- <li>
+		                    <a href="">
+		                        <i class="metismenu-icon">
+		                        </i>Dropdowns
+		                    </a>
+		                </li>
+		                <li>
+		                    <a href="">
+		                        <i class="metismenu-icon">
+		                        </i>Icons
+		                    </a>
+		                </li> god-->
+		            </ul>
+					{% endfor %}
+		        </li>
+				{% endif %}
+	    	</ul>
+			{% endif %}
+		</div>
+		<div class="quit-course"><a class="quit-course-link" href="{{ url_for('main.home',user_id=user_id,user_role=user_role) }}">Quit this class</a></div>
+	</nav>
+	{% endblock %}
+	{% block scripts %}
+		<input type="hidden" value="{{url_for('static', filename='images/yes.png')}}" id="yesImgURL"/>
+		<input type="hidden" value="{{ url_for('static', filename='images/no.png') }}" id="noImgURL"/>
+		<script src="{{url_for('static', filename='js/bootstrap.js')}}" referrerpolicy="origin"></script>
+		<script src="{{url_for('static', filename='js/ui.js')}}"></script>
+		<script src="{{url_for('static', filename='js/home.js')}}"></script>
+		<script src="{{url_for('static', filename='js/summernote.js')}}" referrerpolicy="origin"></script>
+		<script>
+		$("#studyGuide").summernote({
+			height: 500,
+			callbacks: {
+				onKeyup: function(e) {
+					setTimeout(function() {
+					if(user_id == 0 || current_subtopic_id ==0)
+						return;
+					console.log('value changing');
+					study = $("#studyGuide").val();
+					$.ajax({
+						type: 'POST',
+						url: Flask.url_for('main.set_study'),
+						data: JSON.stringify({subtopic_id:current_subtopic_id,user_id:user_id,study:study}),
+						contentType: "application/json",
+						dataType: 'json',
+						success: function(response) {
+							console.log('Set Study succeed');
+						},
+						error: function(response) {
+							document.write(response);
+						}
+					});  
+				},200);
+			}
+			}
+		});
+		</script>
+	{% endblock %}

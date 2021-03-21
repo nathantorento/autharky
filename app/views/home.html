@@ -10,250 +10,58 @@
 
 	{% block content %}
 		<div id="cover" style = "display:block">
-			<form method="get" action="">
-				<div class="tb">
-					<div class="td"><input type="text" placeholder="Paste your class code here!" required></div>
-					<div class="td" id="s-cover">
-						<button class="btnSearch"type="submit">
-							<div id="s-circle"></div>
-							<span></span>
-						</button>
-					</div>
+			<div class="tb">
+				<div class="td"><input type="text" placeholder="Paste your class name here!" required id="searchCourse"></div>
+				<div class="td" id="s-cover">
+					<button class="btnSearch" onClick="joinCourse({{user_id}},'{{user_role}}')">
+						<div id="s-circle"></div>
+						<span></span>
+					</button>
 				</div>
-			</form>
+			</div>
 			<div class="align-horizontal-center">
 				<br>
+				<div class="error" id="joinCourseError"></div>
 				<h1 class="align-horizontal-center">Join a class!</h1>
 			</div>
 		</div>
+		{% if user_role == "instructor" %}
 		<div class="" style="text-align: center;margin-top:5%">
 			<button class="icon-btn add-btn" onclick="window.location.href='{{ url_for('main.create') }}'">
 				<div class="add-icon"></div>
 				<div class="btn-txt">Create a new course</div>
 			</button>
 		</div>
-		<div class="courseContainer" id="courseContainer" style="display: none">
-	    	<div class="card-body course">
-                <ul class="tabs-animated-shadow nav-justified tabs-animated nav course-tab-bar">
-                    <li class="nav-item">
-                        <a role="tab" class="nav-link active" id="tab-c1-0" data-toggle="tab" href="#tab-animated1-0">
-                            <span class="nav-text">Study Guide</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a role="tab" class="nav-link" id="tab-c1-1" data-toggle="tab" href="#tab-animated1-1">
-                            <span class="nav-text">Diagnostic Questions</span>
-                        </a>
-                    </li>
-                </ul>
-                <div class="tab-content course-content">
-                	<br>
-                    <div class="tab-pane active" id="tab-animated1-0" role="tabpanel">
-                        <!-- <p class="mb-0">Put iframe</p> -->
-                        <p><iframe width="96%" height="880px" src="https://docs.google.com/document/d/1hn1aLQqzjhLVsUg8Nxrqi-mf6ei1kTn8POFuL8UWk_A/edit" style="margin: 20px;margin-right: 120px;"></iframe></p>
-                    </div>
-                    <div class="tab-pane" id="tab-animated1-1" role="tabpanel">
-                    	<div class="add-question" id="addQuestion" name="addQuestion">
-                    		<button class="btn-light add-question-btn" style = "cursor: pointer;" data-toggle="modal" data-target=".add-question-modal">Diagnostic Questions</button>
-                    	</div>                        
-                    </div>
-                </div>
-            </div>
-	    </div>
-	{% endblock %}
-
-	{% block modal %}
-	<div class="modal fade add-question-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header empty-modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="modalClose()">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body add-question-modal-content">
-					<div class="question-type" id="selectQuestionType" name="selectQuestionType">
-						<h3>How would you like to enter the diagnostic question(s) for this section?</h3>
-						<br><br>
-						<div class="btn-create-container" style="cursor: url({{ url_for('static', filename='images/cursor.png') }});">
-							<button class="btn-create" id="typeManually" name="typeManually" onclick="typeManually()">Type manually</button>
-							<button class="btn-create" id="uploadPicture" name="uploadPicture" onclick="uploadPicture()">Upload pictures</button>
-						</div>
-					</div>
-					<div id="questionEdit" name="questionEdit">
-						<div id="manually" name="manually">
-							<h6 class="text-left">Question 1:</h6>
-							<div class="question-name">
-								<input class="question-name-edit" type="text" name="questionName">
-							</div>
-							<br>
-							<h6 class="text-left">Answers: (Don't forget to select the correct answer)</h6>
-							<div class="answer-container">
-								<div>
-									<div class="row m-l-0 m-r-0">
-										<div class="col-md-6 answer-field"  id = "answer-fieldA" style = "background-color:#ffb3b3;">
-											<div class="col-md-2 m-l-0 m-r-0 float-l" >
-												<input type="radio" id="radioA" name="radioA" style="height:27px; width:28px;">
-											</div>
-											<div class="col-md-10 m-l-0 m-r-0 float-r"  style = "background-color:#d9d9d9;">
-												<textarea id="optionA" name="optionA" style = "margin-top: 10px;"></textarea>
-											</div>
-										</div>
-										<div class="col-md-6 answer-field"   id = "answer-fieldB"  style = "background-color:#ffb3b3;">
-											<div class="col-md-2 m-l-0 m-r-0 float-l">
-												<input type="radio" id="radioA" name="radioA" style="height:27px; width:28px;">
-											</div>
-											<div class="col-md-10 m-l-0 m-r-0 float-r"  style = "background-color:#d9d9d9;">
-												<textarea id="optionB" name="optionB"  style = "margin-top: 10px;"></textarea>
-											</div>
-										</div>
-									</div>
-									<div class="row m-l-0 m-r-0">
-										<div class="col-md-6 answer-field"  id = "answer-fieldC"  style = "background-color:#ffb3b3;">
-											<div class="col-md-2 m-l-0 m-r-0 float-l">
-												<input type="radio" id="radioA" name="radioA" style="height:27px; width:28px;">
-											</div>
-											<div class="col-md-10 m-l-0 m-r-0 float-r"  style = "background-color:#d9d9d9;">
-												<textarea id="optionC" name="optionC" style = "margin-top: 10px;"></textarea>
-											</div>
-										</div>
-										<div class="col-md-6 answer-field" id = "answer-fieldD" style = "background-color:#ffb3b3;">
-											<div class="col-md-2 m-l-0 m-r-0 float-l">
-												<input type="radio" id="radioA" name="radioA" style="height:27px; width:28px;">
-											</div>
-											<div class="col-md-10 m-l-0 m-r-0 float-r"  style = "background-color:#d9d9d9;">
-												<textarea id="optionD" name="optionD" style = "margin-top: 10px;"></textarea>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<br>
-							<button class="btn-light">Create Question</button>
-						</div>
-						<div id="upload" name="upload">
-							<h6 class="text-left">Question 1:</h6>
-							<div class="question-name">
-								<button class="btn-light upload-picture-btn" style = "width: 240px;" id="questionImage" name="questionImage" onclick="buttonQuestionClick()">Upload image</button>
-								<input type="file" id="attachmentQuestion" name="attachmentQuestion" onchange="showImageQuestion()" hidden>
-								<div class="" style="width: auto;height: auto;">
-									<img id="imageQuestion" name="imageQuestion" style = "display: none" src="" style = "width: 50%; height: 50%;" alt>
-								</div>
-							</div>
-							<br>
-							<h6 class="text-left">Answers: (Don't forget to select the correct answer)</h6>
-							<div class="answer-container">
-								<div>
-									<div class="row m-l-0 m-r-0">
-										<div class="col-md-6 answer-field" id = "answer-imageA" style = "background-color:#ffb3b3;">
-											<div class="col-md-2 m-l-0 m-r-0 float-l">
-												<input type="radio" id="radioA" name="radioA" style="height:27px; width:28px;">
-											</div>
-											<div class="col-md-10 m-l-0 m-r-0 float-r" id="optionA" name="optionA" style = "background-color:#d9d9d9;">
-												<button class="btn-light upload-picture-btn" style = "width: 240px;"
-												id="buttonA" name="buttonA" onclick="buttonAClick()">Upload image</button>
-												<input type="file" id="attachmentA" name="attachmentA" onchange="showImageA()" hidden>
-												<img id="imageA" name="imageA" src="" alt>
-											</div>
-										</div>
-										<div class="col-md-6 answer-field"  id = "answer-imageB" style = "background-color:#ffb3b3;">
-											<div class="col-md-2 m-l-0 m-r-0 float-l">
-												<input type="radio" id="radioA" name="radioA" style="height:27px; width:28px;">
-											</div>
-											<div class="col-md-10 m-l-0 m-r-0 float-r" id="optionB" name="optionB" style = "background-color:#d9d9d9;">
-												<button class="btn-light upload-picture-btn" style = "width: 240px;" id="buttonB" name="buttonB" onclick="buttonBClick()">Upload image</button>
-												<input type="file" id="attachmentB" name="attachmentB" onchange="showImageB()" hidden>
-												<img id="imageB" name="imageB" src="" alt>
-											</div>
-										</div>
-									</div>
-									<div class="row m-l-0 m-r-0">
-										<div class="col-md-6 answer-field"  id = "answer-imageC" style = "background-color:#ffb3b3;">											
-											<div class="col-md-2 m-l-0 m-r-0 float-l">
-												<input type="radio" id="radioA" name="radioA" style="height:27px; width:28px;">
-											</div>
-											<div class="col-md-10 m-l-0 m-r-0 float-r" id="optionC" name="optionC" style = "background-color:#d9d9d9;">
-												<button class="btn-light upload-picture-btn" style = "width: 240px;" id="buttonC" name="buttonC" onclick="buttonCClick()">Upload image</button>
-												<input type="file" id="attachmentC" name="attachmentC" onchange="showImageC()" hidden>
-												<img id="imageC" name="imageC" src="" alt>
-											</div>
-										</div>
-										<div class="col-md-6 answer-field"  id = "answer-imageD" style = "background-color:#ffb3b3;">
-											<div class="col-md-2 m-l-0 m-r-0 float-l">
-												<input type="radio" id="radioA" name="radioA" style="height:27px; width:28px;">
-											</div>
-											<div class="col-md-10 m-l-0 m-r-0 float-r" id="optionD" name="optionD" style = "background-color:#d9d9d9;margin-bottom: 5px;">
-												<button class="btn-light upload-picture-btn" style = "width: 240px;" id="buttonD" name="buttonD" onclick="buttonDClick()">Upload image</button>
-												<input type="file" id="attachmentD" name="attachmentD" onchange="showImageD()" hidden>
-												<img id="imageD" name="imageD" src="" alt>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<br>
-							<button class="btn-light" onclick="uploadCourse()">Create Question</button>
-						</div>
-					</div>
-	            </div>
-	        </div>
-	    </div>
-	</div>
+		{% endif %}
 	{% endblock %}
 
 	{% block leftpane %}
 	<nav id="nav">
 		<div class="innertube">
-			<h3>You haven't joined any classes yet!</h3>
+			<h3>Select the course you want to join</h3>
 		</div>
 		<div class="app-sidebar__inner">
 			{% if current_user.is_authenticated %}
-			<ul class="vertical-nav-menu">
+			<ul class="vertical-nav-menu">	
 				<li>
 			        <!-- <a href="" class="mm-active">
 			            Dashboard Example 1
 			        </a> //god-->
 			    </li>
-				{% if course is defined %}
+				{% if courses is defined %}
+				{% for course in courses %}
 			    <li>
-		            <a href="">
-						{{ course['title'] }}
-		                <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-		            </a>
-					{% for topic in course['topic'] %}
-		            <ul>
-		                <li>
-		                    <a href="">
-		                        <i class="metismenu-icon"></i>
-								{{ topic['title'] }}
-		                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-		                    </a>
-							{% for subtopic in topic['subtopic']%}
-		                    <ul>
-		                        <li>
-		                            <a href="#sss" class="subTopic" id="sub_topic" onclick="subtopicClick({{ subtopic['subtopic_id'] }})">
-		                                <i class="metismenu-icon"></i>
-										{{ subtopic['title'] }}
-		                            </a>
-		                        </li>
-		                    </ul>
-							{% endfor %}
-		                </li>
-		                <!-- <li>
-		                    <a href="">
-		                        <i class="metismenu-icon">
-		                        </i>Dropdowns
-		                    </a>
-		                </li>
-		                <li>
-		                    <a href="">
-		                        <i class="metismenu-icon">
-		                        </i>Icons
-		                    </a>
-		                </li> god-->
-		            </ul>
-					{% endfor %}
+					<div style="display:flex; justify-content: space-between">
+						<a class="{{course.role}}" href="{{ url_for('main.course',user_id=current_user.id,user_role=course.role,course=course.title) }}">
+							{{ course.title }}
+							<i class="metismenu-state-icon pe-7s-angle-right caret-left"></i>
+						</a>
+						{% if course.role == "instructor" %}
+							<button class="btn btn-danger pull-right" onClick="delCourse({{user_id}},{{course.id}},'{{user_role}}')">Delete Course</button>
+						{% endif %}
+					</div>
 		        </li>
+				{% endfor %}
 				{% endif %}
 	    	</ul>
 			{% endif %}

@@ -35,6 +35,16 @@ body {
         height: 100%;
       }
       
+      #navCourse {
+        padding-bottom: 10010px;
+        margin-bottom: -10000px;
+        float: left;
+        width: 20vw;
+        margin-left: -100%;
+        background: #D5B5FF;
+        height: 100%;
+      }
+      
       #footer {
         clear: left;
         width: 100%;
@@ -48,7 +58,7 @@ body {
         height: 100vw;
       }
             
-      #content {
+      #capstone-content {
         margin-left: 230px; /* Same as 'nav' width */
         padding-left: 10vw;
       }
@@ -157,8 +167,6 @@ body {
         }
 
         .menu-links li:first-child:hover a {
-          color: black;  
-          background-color: #FFAB91;
         }
 
         #QC-info {
@@ -203,4 +211,30 @@ body {
           width: 10vw;
           opacity: 0;
           height: 6vh;
+        }
+        
+        .quit-course {
+          position: fixed;
+          bottom: 10px;
+          left: 10px;
+        }
+
+        .quit-course-link {
+          text-decoration: none;
+          font-size: 20px;
+          color: black;
+        }
+
+        .quit-course-link:hover {
+          color: red;
+          text-decoration: none;
+        }
+        .vertical-nav-menu li .selected {
+          color: red !important;
+        }
+        .right-answer {
+          background-color: #3f3;
+        }
+        .wrong-answer {
+          background-color: #e30;
         }

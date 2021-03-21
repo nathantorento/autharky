@@ -1,0 +1,97 @@
+{% extends 'layouts/layout.html' %}
+
+{% block links %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/register.css')}}">
+{% endblock %}
+
+{% block main %}
+<div class="container-login" style="background-image: url({{ url_for('static', filename='images/img-01.jpg') }});">
+	<div class="login-wrap">
+		<div class="login-html">
+			<h3 style="margin-left: 36%;color: #ffffff">Sign Up</h3>
+			<form class="login-form validate-form" style = "display: block;" method="POST">
+				<div class="sign-up-htm">
+					<div class="group">
+						<label for="user" class="label" >Username</label>
+
+						<div class="wrap-input100 validate-input m-b-10" data-validate = "Username is required">
+	                        <input class="input100" id="user" type="text" name="user" placeholder="Username">
+	                        <span class="focus-input100"></span>
+	                        <span class="symbol-input100">
+	                            <i class="fa fa-user"></i>
+                        	</span>
+                    	</div>
+
+					</div>
+					<div class="group">
+						<label for="passw" class="label">Password</label>
+						<div class="wrap-input100 validate-input m-b-10" data-validate = "Password is required">
+	                        <input class="input100" id="passw" type="password" name="passw" placeholder="password">
+	                        <span class="focus-input100"></span>
+	                        <span class="symbol-input100">
+	                            <i class="fa fa-lock"></i>
+                        	</span>
+                    	</div>
+					</div>
+					<div class="group">
+						<label for="repeat" class="label">Repeat Password</label>
+						<div class="wrap-input100 validate-input m-b-10" data-validate = "Password is incorrect">
+	                        <input class="input100" id="repeat" type="password" name="repeat" placeholder="repeat">
+	                        <span class="focus-input100"></span>
+	                        <span class="symbol-input100">
+	                            <i class="fa fa-lock"></i>
+                        	</span>
+                    	</div>
+					</div>
+					<div class="group">
+						<label for="mail" class="label">Email Address</label>
+						<div class="wrap-input100 validate-input m-b-10" data-validate = "Email Address is required">
+	                        <input class="input100" id="mail" type="text" name="mail" placeholder="Email Address">
+	                        <span class="focus-input100"></span>
+	                        <span class="symbol-input100">
+	                            <i class="fa fa-envelope icon"></i>
+                        	</span>
+                    	</div>
+					</div>
+					<div class="group">
+						<div class="signup-userrole-wrapper">
+							<div class="signup-userrole">
+								<input class="radio" id="student" type="radio" name="userrole" value="student" checked>
+								<span class="signup-userrole-txt">Student</span>
+							</div>
+							<div class="signup-userrole">
+								<input class="radio" id="userrole" type="radio" name="userrole" value="instructor">
+								<span class="signup-userrole-txt">Instructor</span>
+							</div>
+						</div>
+					</div>
+					
+					{% if message %}
+                    <div class="text-center w-full p-t-10 p-b-10" style="color:red">
+
+                        {{ message }}
+
+                    </div>
+					{% else %}
+					<br><br><br>
+                    {% endif %}
+
+					<div class="group">
+						<input type="submit" class="login-form-button" value="Sign Up">
+					</div>
+					<div class="hr"></div>
+					<div class="foot-lnk">
+
+					</div>
+
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{url_for('static', filename='js/register.js')}}"></script>
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
+{% endblock %}

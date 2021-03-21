@@ -6,9 +6,7 @@ $(document).ready(function() {
     $('#Number_topic').on('input', function() {
         if($('#Number_topic').val() > 0)
         {
-            $('#subtopic').removeClass('disabled');
             $('#topic').removeClass('disabled');
-            $('#subtopic').addClass('active');
             $('#topic').addClass('active');
         }
     });
@@ -16,38 +14,6 @@ $(document).ready(function() {
     $('body').on('mousedown', '.create-text-input-topic', function() {
         selectid = this.id;
      });
-  
-
-	$('#btn_no').on('click', function() {
-        $('#topic_container').html("");
-        $('#topic_container').append('\
-            <div class="create-text-input">\
-                <h6 class="title-font-size"> Proceeding to fill in one by one</h6>\
-            </div>\
-            <br>\
-            <div id="topic_content" class="topic_content" name="topic_content">\
-            </div>\
-            <br>\
-            <div class="row" class="create-text-input">\
-                <div class="col-md-6 align-horizontal-center">\
-                    <button class="mb-2 mr-2 btn btn-light" id = "CreateCourse" onclick="createCourse()">Create course</button>\
-                </div>\
-                <div class="col-md-6" class="create-text-input">\
-                    <div class="row">\
-                        <div class="col-md-3"></div>\
-                        <div class="col-md-6 align-horizontal-center pull-right" id="add_topic_container" name="add_topic_container">\
-                        </div>\
-                        <div class="col-md-3">\
-                            <button type="button" class="btn-shadow mr-3 btn btn-dark btn-add" onclick="addTopicButtons()">\
-                                <h6>+</h6>\
-                            </button>\
-                        </div>\
-                    </div>\
-                </div>\
-            </div>');
-    });
-    
-
 });
 var nTopic_Count = 0;
 
@@ -56,7 +22,7 @@ var addTopicButtons = function() {
     {
         $('#add_topic_container').html("");
         $('#add_topic_container').append('\
-            <a onclick="addSubTopic()"><u class = "active"  id = "subtopic">Add subtopic</u></a>\
+            <a onclick="addSubTopic()"><u class = "disabled"  id = "subtopic">Add subtopic</u></a>\
             <br>\
             <a onclick="addTopic()"><u class = "active" id = "topic">Add topic</u></a>');
     }
@@ -71,6 +37,14 @@ var addTopicButtons = function() {
 }
 
 var addTopic = function() {
+    if($("#topic").attr('class').indexOf('disabled') >= 0){
+        console.log('disabled add Topic');
+        return;
+    }
+    $("#topic").removeClass('active');
+    $("#topic").addClass('disabled');
+    $("#subtopic").removeClass('disabled');
+    $("#subtopic").addClass('active');
     if(b)
     {
        if($('#Number_topic').val() > nTopic_Count)
@@ -93,9 +67,16 @@ var addTopic = function() {
 
         nTopic_Count++;
     }
+    if(nTopic_Count >= $('#Number_topic').val())
+    {
+        $("#topic").removeClass('active');
+        $("#topic").addClass('disabled');
+    }
 }
 
 var addSubTopic = function() {
+    if($("#subtopic").attr('class').indexOf('disabled') >= 0)
+        return;
     b = true;
     if(nTopic_Count > 0)
     {       
@@ -103,15 +84,24 @@ var addSubTopic = function() {
             '\<h6 class="title-font-size">Subtopic name</h6>\
             <input type="text" name="curse_name" class="create-text-input subtopic"/>'
         );
+        $("#topic").removeClass('disabled');
+        $("#topic").addClass('active');
+    }
+    if(nTopic_Count >= $('#Number_topic').val())
+    {
+        $("#CreateCourse").removeClass('disabled');
     }
 }
 
 var createCourse = function() {
+    if($("#CreateCourse").attr('class').indexOf('disabled') >= 0)
+        return;
     if($('#course_title').val() == "")
     {
         $('#course_title').focus();
         $('#invalidCoursenName').css('display', 'block');
         $('#course_title').css('border-color', '#ff1a1a');
+       
     }
     else
     {
@@ -123,6 +113,7 @@ var createCourse = function() {
         $('#Number_topic').focus();
         $('#invalidNumbertopic').css('display', 'block');
         $('#Number_topic').css('border-color', '#ff1a1a');
+        return;
     }
     else
     {
@@ -130,6 +121,8 @@ var createCourse = function() {
         $('#Number_topic').css('border-color', '#000');
     }
 
+     if($('#course_title').val() == "" || $('#Number_topic').val() == "")
+         return;
 
      var jsonData = {};
      jsonData.title = $('#course_title').val();
@@ -188,7 +181,7 @@ var createCourse = function() {
          contentType: "application/json",
          dataType: 'json',
          success: function(response) {
-             window.location=Flask.url_for('main.home', {user_id:response.user_id, course_id:response.course_id});
+             window.location=Flask.url_for('main.course', {user_id:response.user_id, course:response.course, user_role:"instructor"});
          },
          error: function(response) {
              document.write(response);
